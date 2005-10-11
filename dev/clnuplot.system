@@ -1,0 +1,61 @@
+;;;-*- Mode: Lisp; Package: COMMON-LISP-USER -*-
+
+(in-package :COMMON-LISP-USER)
+
+;;; ---------------------------------------------------------------------------
+
+(glu-define-logical-pathname-translations (clnuplot)
+  (source)
+  (plots "plots")
+  (metatilities (:back :back "metatilities" "dev"))
+  (tests "tests"))
+
+;;; ---------------------------------------------------------------------------
+
+(setf (glu-system-source-file :glu-utilities)
+      "clnuplot:metatilities;glu-utilities.system")
+
+;;; ---------------------------------------------------------------------------
+
+(define-glu-system :clnuplot-shared
+  (
+   (("package"
+     "utilities"
+     "plots"
+     "roc-curves"))     
+   
+   ;; associates
+   (("notes"
+     "examples")
+    :associates? t))
+  
+  ;; DEFAULTS
+  :base-dir "clnuplot:source;"
+  :bin-identifiers (:platform :vendor)
+  :depends-on (glu-utilities)
+  :top-level nil)
+
+;;; ---------------------------------------------------------------------------
+
+(define-glu-system :clnuplot
+  ()
+  
+  ;; DEFAULTS
+  :base-dir "clnuplot:source;"
+  :bin-identifiers (:platform :vendor)
+  :depends-on (clnuplot-shared
+               #+DIGITOOL
+               clnuplot-interface)
+  :top-level t)
+
+;;; ---------------------------------------------------------------------------
+
+(define-glu-system clnuplot-interface
+  ("plot-window")
+  :depends-on (image-dialog applescript)
+  :base-dir "clnuplot:source;"
+  :bin-identifiers (:platform :vendor :gui))
+
+;;; ***************************************************************************
+;;; *                              End of File                                *
+;;; ***************************************************************************
