@@ -16,11 +16,10 @@ DISCUSSION
 (in-package clnuplot)
 
 (defmethod serialized-slots append-slots ((object plot-abstract))
-  (mopu-class-slot-names object))
+  (slot-names object))
 
 (defmethod serialized-slots append-slots ((object plot-data-set))
-  (mopu-class-slot-names object))
-
+  (slot-names object))
 
 (defmethod unserialized-slots append-slots ((object numbered-instances-mixin))
   '(object-number))
