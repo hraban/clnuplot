@@ -2,12 +2,6 @@
 
 #| simple-header
 
-$Id: load-glu.lisp,v 1.1 2005/05/19 17:20:37 gwking Exp $
-
-Copyright 1992 - 2004 Experimental Knowledge Systems Lab, 
-University of Massachusetts Amherst MA, 01003-4610
-Professor Paul Cohen, Director
-
 Author: Gary King
 
 DISCUSSION

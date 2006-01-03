@@ -2,12 +2,6 @@
 
 #| simple-header
 
-$Id: plots.lisp,v 1.16 2005/10/04 16:23:09 gwking Exp $
-
-Copyright 1992 - 2005 Experimental Knowledge Systems Lab, 
-University of Massachusetts Amherst MA, 01003-4610
-Professor Paul Cohen, Director
-
 Author: Gary King
 
 DISCUSSION
@@ -19,17 +13,6 @@ DISCUSSION
 write-plot-settings has too much similarity
 make-data-set has too much similarity
 |#
-
-(export '(make-plot
-          write-plot
-          fullpath
-          
-          scatter-plot
-          histogram
-          
-          *plot-default-host*
-          *plot-default-directory*
-          *plot-ps2pdf-directory*))
 
 ;;; ---------------------------------------------------------------------------
 
@@ -80,8 +63,7 @@ set key {on|off} {default}
 (defclass* plot-abstract (object-with-name)
   ((settings (make-container 'simple-associative-container) r)
    (data-sets (make-container 'stable-associative-container) r)
-   (comment nil ia))
-  :copy-slots)
+   (comment nil ia)))
 
 ;;; ---------------------------------------------------------------------------
 
@@ -108,7 +90,6 @@ set key {on|off} {default}
   (:default-initargs
     :host *plot-default-host*
     :directory *plot-default-directory*)
-  :copy-slots
   (:export-slots filename))
 
 ;;; ---------------------------------------------------------------------------
