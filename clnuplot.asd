@@ -45,7 +45,7 @@ DISCUSSION
                          #-DIGITOOL
                          (:static-file "plot-window")
                          
-                         (:static-file "notes")
+                         (:static-file "notes.text")
                          (:static-file "examples"))))
   
   :depends-on (cl-containers cl-mathstats))

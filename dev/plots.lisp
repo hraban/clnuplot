@@ -60,7 +60,7 @@ set key {on|off} {default}
 
 ;;; ---------------------------------------------------------------------------
 
-(defclass* plot-abstract (object-with-name)
+(defclass* plot-abstract ()
   ((settings (make-container 'simple-associative-container) r)
    (data-sets (make-container 'stable-associative-container) r)
    (comment nil ia)))

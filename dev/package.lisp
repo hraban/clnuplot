@@ -13,7 +13,7 @@ DISCUSSION
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (unless (find-package :clnuplot)
     (defpackage "CLNUPLOT"
-      (:use "COMMON-LISP" "METATILITIES" "BIND")
+      (:use "COMMON-LISP" "METATILITIES" "BIND" "CL-MATHSTATS")
       (:export
        #:make-plot
        #:write-plot

@@ -57,5 +57,10 @@ Support for optional parameters (e.g., boxes fill solid takes an optional densit
 adding text / extra notes to a plot
 
 
+	? 	make-plot  &rest args &key name comment filename plotIf you do not supply a plot argument, this creates a new plot object that contains a single data set. If you do supply the plot argument, the data set and it’s information will be added to it.For example, I have a command that first calls make-plot with not data:(make-plot nil nil         :title "Error rate versus F-measure"        :xlabel "Percent Mixing"        :ylabel "F-Measure"))and then later uses the returned plot to build up a number of data-sets:(make-plot :points data        :legend (format nil "Negative ~,2F; Positive ~,2F"                             (getf key :fnr) (getf key :fpr))        :x-coord (lambda (x) (getf x :pm))        :y-coord (lambda (x) (getf x :f))        :plot plot)The final plot object returned contains a whole bunch of data sets.Make-plot currently supports :line, :points and :bar styles. Plots can have titles, a label on the x-axis and the y-axis and custom labels for the legend. Much of the rest of the functionality of GNUplot is missing but the framework is in place to add it pretty easily (I think… I’ll be adding stuff as I need it). Look in the parameters *plot-plot-settings* and *plot-data-set-settings* to get a sense of what setting the plot code knows about.	? 	write-plot This command writes the plot object to its file. Each plot object specifies a host, fullpath (directory) and filename. The host and directory default to *plot-default-host* and *plot-default-directory*. The filename will default to “plot”When you call write-plot it will return the pathname to which the file is written. The file can be executed in GNUPlot (either by piping it from the command line (note bene, I haven’t tried this yet myself) or by using the load command in GNUPlot). The plot commands and data will all be included in this single file.
+
 ok - making it square (for roc)
 ok - hiding legend
+
+
+
