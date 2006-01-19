@@ -20,23 +20,22 @@
        
        (:P "The basic model is one of plots and data-sets. A plot contains information for the entire information display; for example, the title, the axis labels and so forth. Each data set contains information about how to display a single group of data in some format; e.g., the data, the display style, the name of the data in the legend and so forth. A plot contains one or data sets.")
        
-       ((:A :NAME "mailing-lists"))
+       ((:A :HREF "mailing-lists"))
        (:h3 "Mailing Lists")
        (:P "Nope. Sorry, there isn't one. You can, however, contact " (rw:link :mail-gwking) ".")
        
        
-       ((:A :NAME "downloads"))
+       ((:A :HREF "downloads"))
        (:H3 "Where is it")
        (:P "CLNUPlot is on the " (rw:link :clnuplot-cliki :title "CLiki") ". A " (rw:link :darcs) " repository is available. The command to get it is below:")
-       (:UL
-        (:LI "darcs get http://common-lisp.net/project/cl-containers/clnuplot/darcs/clnuplot"))
+       (:PRE "darcs get http://common-lisp.net/project/cl-containers/clnuplot/darcs/clnuplot")
        (:P "CLNUPlot should also be " (rw:link :asdf-install :title "ASDF installable") " (and here is my " (rw:link :gpg-gwking :title "GPG Key") "). There's also a handy " (rw:link :clnuplot-package :title "gzipped tar file") ".") 
        
-       ((:A :NAME "news"))
+       ((:A :HREF "news"))
        (:H3 "What is happening")
        ((:TABLE :BORDER "0") 
         ((:TR :ALIGN "left" :VALIGN "top")
-         ((:TD :WIDTH "100px") "3 January 2006")
+         ((:TD) "3 January 2006")
          (:TD "Just getting things set up here."))))))
     
     
