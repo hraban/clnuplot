@@ -32,9 +32,9 @@
        
        ((:A :NAME "news"))
        (:H3 "What is happening")
-       ((:TABLE :BORDER "0") 
-        ((:TR :ALIGN "left" :VALIGN "top")
-         ((:TD) "3 January 2006")
+       ((:TABLE :CLASS "system-news") 
+        (:TR
+         (:TH "3 January 2006")
          (:TD "Just getting things set up here.")))))
     
     
