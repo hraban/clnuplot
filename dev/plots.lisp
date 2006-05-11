@@ -7,7 +7,7 @@ Author: Gary King
 DISCUSSION
 
 |#
-(in-package clnuplot)
+(in-package #:clnuplot)
 
 #|
 write-plot-settings has too much similarity

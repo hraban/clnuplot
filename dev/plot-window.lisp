@@ -1,4 +1,4 @@
-(in-package clnuplot)
+(in-package #:clnuplot)
 
 (defparameter *gnuplot-home* "/usr/local/bin/gnuplot")
 

@@ -1,4 +1,4 @@
-(in-package clnuplot)
+(in-package #:clnuplot)
 
 (export '(roc! roc make-roc-plot make-roc-plot-template))
 

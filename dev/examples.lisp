@@ -7,7 +7,7 @@ Author: Gary King
 DISCUSSION
 
 |#
-(in-package clnuplot)
+(in-package #:clnuplot)
 
 (let ((plot
        (make-plot :bar

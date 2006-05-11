@@ -7,7 +7,7 @@ Author: Gary King
 DISCUSSION
 
 |#
-(in-package clnuplot)
+(in-package #:clnuplot)
 
 (defmethod serialized-slots append-slots ((object plot-abstract))
   (slot-names object))

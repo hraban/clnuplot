@@ -7,7 +7,7 @@ Author: Gary King
 DISCUSSION
 
 |#
-(in-package clnuplot)
+(in-package #:clnuplot)
 
 (defun make-string-safe-for-unix (string)
   (let ((result (make-array (* (length string) 2) :fill-pointer 0 :adjustable t)))
