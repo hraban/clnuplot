@@ -11,7 +11,7 @@ DISCUSSION
 
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (unless (find-package #:clnuplot)
+  (unless (find-package '#:clnuplot)
     (defpackage #:clnuplot
       (:use #:common-lisp #:metatilities #:bind #:cl-mathstats)
       (:export
