@@ -7,7 +7,7 @@ Author: Gary King
 DISCUSSION
 
 |#
-(in-package :cl-user)
+(in-package #:cl-user)
 
 
 (eval-when (:compile-toplevel :load-toplevel :execute)

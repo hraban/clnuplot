@@ -76,10 +76,11 @@ set key {on|off} {default}
 
 
 (defun fullpath (plot)
-  (make-pathname :name (filename plot)
-                 :type "data"
-                 :host (host plot)
-                 :directory (filepath plot)))
+  (dsc:system-relative-pathname 
+   (host plot)
+   (make-pathname :name (filename plot)
+                  :type "data"
+                  :directory (filepath plot))))
 
 ;;; ---------------------------------------------------------------------------
 
