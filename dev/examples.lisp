@@ -1,4 +1,4 @@
-;;;-*- Mode: Lisp; Package: CLNUPLOT -*-
+;;;-*- Mode: Lisp; Package: clnuplot -*-
 
 #| simple-header
 
