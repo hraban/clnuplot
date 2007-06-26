@@ -76,7 +76,8 @@ set key {on|off} {default}
 
 
 (defun fullpath (plot)
-  (dsc:system-relative-pathname 
+  ;; FIXME
+  (asdf:system-relative-pathname 
    (host plot)
    (make-pathname :name (filename plot)
                   :type "data"
