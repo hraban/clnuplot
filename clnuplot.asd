@@ -13,7 +13,7 @@ DISCUSSION
 (in-package #:clnuplot-system)
 
 (defsystem clnuplot
-  :version "0.1.1"
+  :version "0.1.2"
   :author "Gary Warren King <gwking@metabang.com>"
   :maintainer "Gary Warren King <gwking@metabang.com>"
   :licence "MIT License"
