@@ -151,7 +151,8 @@ numbers."
                     :linewidth linewidth
                     args)))
       (cond ((and (consp data) 
-                  (length-exactly-p (first data) 2)
+		  (length-at-most-p (first data) 2)
+		  (length-at-least-p (first data) 2)
                   (numberp (caar data)))
              ;; single plot
              ;; ((1 2) ...)
