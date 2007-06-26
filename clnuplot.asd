@@ -8,9 +8,9 @@ DISCUSSION
 
 |#
 
-(in-package :common-lisp-user)
-(defpackage :clnuplot-system (:use #:asdf #:cl))
-(in-package clnuplot-system)
+(in-package #:common-lisp-user)
+(defpackage #:clnuplot-system (:use #:asdf #:cl))
+(in-package #:clnuplot-system)
 
 (defsystem clnuplot
   :version "0.1.1"
