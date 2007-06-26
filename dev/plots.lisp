@@ -165,13 +165,15 @@ set key {on|off} {default}
     (iterate-key-value
      (settings plot)
      (lambda (name value)
-       (awhen (find name *plot-plot-settings* :key 'first)
-         (bind (((name &rest data) it)
-                ((values name value) (handle-setting (first data) name data value)))
-           (when (and name value)
-             (format out "set ~(~A~) ~A~C" name 
-                     (format-value-for-gnuplot name value)
-                     #\Linefeed))))))
+       (let ((it (find name *plot-plot-settings* :key 'first)))
+	 (when it
+	   (bind (((name &rest data) it)
+		  ((values name value) 
+		   (handle-setting (first data) name data value)))
+	     (when (and name value)
+	       (format out "set ~(~A~) ~A~C" name 
+		       (format-value-for-gnuplot name value)
+		       #\Linefeed)))))))
     
     ;; handle range separately
     (when (or (item-at settings :xmin) (item-at settings :xmax))
@@ -189,15 +191,17 @@ set key {on|off} {default}
     (iterate-key-value
      settings
      (lambda (name value)
-       (awhen (find name *plot-data-set-settings* :key 'first)
-         (bind (((name &rest data) it)
-                ((values name value) (handle-setting (first data) name data value)))
-           (when (and name value)
-             (unless first?
-               (format out " "))
-             (format out "~(~A~) ~A" name 
-                     (format-value-for-gnuplot name value))
-             (setf first? nil))))))))
+       (let ((it (find name *plot-data-set-settings* :key 'first))) 
+	 (when it
+	   (bind (((name &rest data) it)
+		  ((values name value)
+		   (handle-setting (first data) name data value)))
+	     (when (and name value)
+	       (unless first?
+		 (format out " "))
+	       (format out "~(~A~) ~A" name 
+		       (format-value-for-gnuplot name value))
+	       (setf first? nil)))))))))
 
 ;;; ---------------------------------------------------------------------------
 
@@ -284,8 +288,9 @@ set key {on|off} {default}
 
 (defun set-settings (possibile-settings object settings)
   (loop for setting-info in possibile-settings do
-        (bind (((name &rest nil) setting-info))
-          (awhen (getf settings name)
+        (bind (((name &rest nil) setting-info)
+	       (it (getf settings name)))
+          (when it
             (setf (item-at (settings object) name) it)))))
 
 ;;; ---------------------------------------------------------------------------
