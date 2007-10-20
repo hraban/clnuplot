@@ -50,4 +50,4 @@ DISCUSSION
              :legend "Some points"
              :fill (list :solid 0.25)
              :plot plot)
-  (write-plot plot :postscript))
+  (write-plot plot :pdf))

@@ -37,14 +37,6 @@ list-container means values end up in wrong order!
 
 automatically offset multiple bar graphs...
 
-#+Test
-(ccl::do-shell-script
- "/usr/local/bin/gnuplot ~/repository/p2dis/clnuplot/dev/plots/20050524-roc-p-4-4000.data")
-
-(ccl::do-shell-script
- (format nil "/usr/local/bin/gnuplot ~A" 
-         (macintosh-path->unix #P"clnuplot:plots;20050524-roc-p-4-4000.data")))
-
 labeling points
 
 multiple roc curves
