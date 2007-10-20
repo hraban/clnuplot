@@ -13,7 +13,7 @@ DISCUSSION
 (in-package #:clnuplot-system)
 
 (defsystem clnuplot
-  :version "0.1.2"
+  :version "0.2.0"
   :author "Gary Warren King <gwking@metabang.com>"
   :maintainer "Gary Warren King <gwking@metabang.com>"
   :licence "MIT License"
@@ -28,15 +28,14 @@ DISCUSSION
 			:depends-on ("utilities"))
 		 (:file "roc-curves"
 			:depends-on ("plots"))     
-                         
-		 #+DIGITOOL
 		 (:file "plot-window"
 			:depends-on ("plots"))
-		 #-DIGITOOL
-		 (:static-file "plot-window")
                          
 		 (:static-file "notes.text")
 		 (:static-file "examples"))))
   
-  :depends-on (:cl-containers :cl-mathstats))
+  :depends-on (:cl-containers 
+	       :cl-mathstats 
+	       :metabang-bind
+	       :trivial-shell))
 
