@@ -13,7 +13,8 @@ DISCUSSION
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (unless (find-package '#:clnuplot)
     (defpackage #:clnuplot
-      (:use #:common-lisp #:metatilities #:bind #:cl-mathstats #:cl-containers)
+      (:use #:common-lisp #:metatilities #:bind 
+	    #:cl-mathstats #:cl-containers)
       (:export
        #:make-plot
        #:write-plot
@@ -24,5 +25,7 @@ DISCUSSION
           
        #:*plot-default-host*
        #:*plot-default-directory*
-       #:*plot-ps2pdf-directory*)
+       #:*plot-ps2pdf-directory*
+       #:*gnuplot-home*)
+      #+ccl
       (:export #:open-plot-in-window))))
