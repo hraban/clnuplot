@@ -1,5 +1,3 @@
-;;;-*- Mode: Lisp; Package: clnuplot -*-
-
 #| simple-header
 
 Author: Gary King

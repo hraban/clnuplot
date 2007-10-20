@@ -1,5 +1,3 @@
-;;;-*- Mode: Lisp; Package: CLNUPLOT -*-
-
 #| simple-header
 
 Author: Gary King
@@ -10,7 +8,8 @@ DISCUSSION
 (in-package #:clnuplot)
 
 (defun make-string-safe-for-unix (string)
-  (let ((result (make-array (* (length string) 2) :fill-pointer 0 :adjustable t)))
+  (let ((result (make-array (* (length string) 2)
+			    :fill-pointer 0 :adjustable t)))
     (flet ((add-char (char)
              (setf (aref result (length result)) char)
              (incf (fill-pointer result))))
