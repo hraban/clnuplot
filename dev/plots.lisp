@@ -12,8 +12,6 @@ write-plot-settings has too much similarity
 make-data-set has too much similarity
 |#
 
-;;; ---------------------------------------------------------------------------
-
 (defvar *plot-default-host* "clnuplot")
 (defvar *plot-default-directory* "plots")
 (defvar *plot-ps2pdf-directory* "/usr/local/bin/")
@@ -45,8 +43,6 @@ set key {on|off} {default}
   {linewidth | lw <line_width>}}}
 |#
 
-;;; ---------------------------------------------------------------------------
-
 (defparameter *plot-data-set-settings*
   `((:style)
     (:legend :translate :title)
@@ -56,14 +52,10 @@ set key {on|off} {default}
     (:linestyle)
     (:pointsize)))
 
-;;; ---------------------------------------------------------------------------
-
 (defclass* plot-abstract ()
   ((settings (make-container 'simple-associative-container) r)
    (data-sets (make-container 'stable-associative-container) r)
    (comment nil ia)))
-
-;;; ---------------------------------------------------------------------------
 
 (defgeneric write-plot (plot style)
   (:documentation "")
@@ -81,8 +73,6 @@ set key {on|off} {default}
                   :type "data"
                   :directory (filepath plot))))
 
-;;; ---------------------------------------------------------------------------
-
 (defclass* gnuplot (plot-abstract)
   ((filename "plot" ia)
    (host nil ia)
@@ -91,8 +81,6 @@ set key {on|off} {default}
     :host *plot-default-host*
     :directory *plot-default-directory*)
   (:export-slots filename))
-
-;;; ---------------------------------------------------------------------------
 
 (defclass* plot-data-set ()
   ((settings (make-container 'simple-associative-container) r)
@@ -104,8 +92,6 @@ set key {on|off} {default}
          #+Ignore
          (make-container 'sorted-list-container
                          :key 'first :stable? t) r)))
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod write-plot ((plot gnuplot) (style (eql :gnuplot)))
   (let ((pathname (fullpath plot))
@@ -141,8 +127,6 @@ set key {on|off} {default}
          (setf first? nil))))
     pathname))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod write-plot ((plot gnuplot) (style (eql :postscript)))
   (with-new-file (out (fullpath plot))
     (format out "set term push~C" #\Linefeed)
@@ -156,8 +140,6 @@ set key {on|off} {default}
       (format out "!~Aps2pdf ~A.ps~C~C"
               *plot-ps2pdf-directory* (filename plot) #\Linefeed #\Linefeed)))
   plot) 
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod write-plot-settings ((plot gnuplot) out)
   (let ((settings (settings plot)))
@@ -182,8 +164,6 @@ set key {on|off} {default}
       (format out "set yrange [~:[*~;~:*~A~]:~:[*~;~:*~A~]] ~C" 
               (item-at settings :ymin) (item-at settings :ymax) #\Linefeed))))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod write-plot-settings ((plot plot-data-set) out)
   (let ((first? t)
         (settings (settings plot)))
@@ -202,16 +182,12 @@ set key {on|off} {default}
 		       (format-value-for-gnuplot name value))
 	       (setf first? nil)))))))))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod write-data-set ((data-set plot-data-set) out)
   (iterate-elements
    (data data-set)
    (lambda (datum)
      (format out "~{~A ~}~C" datum #\Linefeed)))
   (format out "e~C" #\Linefeed))
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod make-plot ((plot-kind symbol) data 
                       &rest args
@@ -230,8 +206,6 @@ set key {on|off} {default}
   
   (values plot))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod make-data-set (plot-kind data
                           &rest args
                           &key (comment nil)
@@ -249,8 +223,6 @@ set key {on|off} {default}
          (insert-item (data data-set) 
                       (apply #'make-data-point point-kind datum args)))))
     (values data-set)))
-  
-;;; ---------------------------------------------------------------------------
 
 (defmethod make-data-point ((point-kind (eql :box)) datum
                             &key (x-coord 'first) (y-coord 'second) (width 0.5)
@@ -264,17 +236,11 @@ set key {on|off} {default}
    (if y-coord (list (funcall y-coord datum)) nil)
    (list (determine-width width))))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod determine-width ((width number))
   (values width))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod determine-width ((width function))
   (funcall width))
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod make-data-point ((point-kind (eql :point)) datum
                             &key (x-coord 'first) (y-coord 'second)
@@ -283,8 +249,6 @@ set key {on|off} {default}
    (if x-coord (list (funcall x-coord datum)) nil)
    (if y-coord (list (funcall y-coord datum)) nil)))
 
-;;; ---------------------------------------------------------------------------
-
 (defun set-settings (possibile-settings object settings)
   (loop for setting-info in possibile-settings do
         (bind (((name &rest nil) setting-info)
@@ -292,42 +256,26 @@ set key {on|off} {default}
           (when it
             (setf (item-at (settings object) name) it)))))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod handle-setting ((kind (eql nil)) name data value)
   (values name value))
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod handle-setting ((kind (eql :translate)) name data value)
   (values (getf data :translate) value))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod handle-setting ((kind (eql :range)) name data value)
   (values nil nil))
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod format-value-for-gnuplot (name (value string))
   (format nil "\"~A\"" (make-string-safe-for-unix value)))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod format-value-for-gnuplot (name (value symbol))
   (format nil "~(~A~)" (symbol-name value)))
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod format-value-for-gnuplot (name (value integer))
   (format nil "~D" value))
 
-;;; ---------------------------------------------------------------------------
-
 (defmethod format-value-for-gnuplot (name (value number))
   (format nil "~F" value))
-
-;;; ---------------------------------------------------------------------------
 
 (defmethod format-value-for-gnuplot (name (value list))
   (with-output-to-string (out)
@@ -377,8 +325,6 @@ set key {on|off} {default}
        (setf first? nil)))
     (values plot)))
 
-;;; ---------------------------------------------------------------------------
-
 (defun scatter-plot (data &rest args &key
                           (x-coord 'first)
                           (y-coord 'second)
@@ -415,8 +361,6 @@ set key {on|off} {default}
                   args)
        (setf first? nil)))
     (values plot)))
-
-;;; ---------------------------------------------------------------------------
 
 (defun histogram (data &rest args &key
                        (x-coord 'first)
@@ -458,8 +402,6 @@ set key {on|off} {default}
                   :legend (when legend-creator (funcall legend-creator data-kind)))
        (setf first? nil)))
     (values plot)))
-
-;;; ---------------------------------------------------------------------------
 
 (defun data->n-buckets (data bucket-count key &key bucket-center)
   (let ((min most-positive-double-float)
