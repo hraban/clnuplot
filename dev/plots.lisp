@@ -14,7 +14,10 @@ make-data-set has too much similarity
 
 (defvar *plot-default-host* "clnuplot")
 (defvar *plot-default-directory* "plots")
-(defvar *plot-ps2pdf-directory* "/usr/local/bin/")
+(defvar *plot-ps2pdf-command* "/usr/local/bin/pstopdf")
+
+#+(or)
+(setf *plot-ps2pdf-command*  "/usr/bin/pstopdf")
 
 (defparameter *plot-plot-settings* 
   `((:title)
@@ -137,8 +140,8 @@ set key {on|off} {default}
     (with-new-file (out (fullpath plot))
       (format out "set output~C" #\Linefeed)
       (format out "~Cset term pop~C" #\Linefeed #\Linefeed)
-      (format out "!~Aps2pdf ~A.ps~C~C"
-              *plot-ps2pdf-directory* (filename plot) #\Linefeed #\Linefeed)))
+      (format out "!~A ~A.ps~C~C"
+              *plot-ps2pdf-command* (filename plot) #\Linefeed #\Linefeed)))
   plot) 
 
 (defmethod write-plot-settings ((plot gnuplot) out)
