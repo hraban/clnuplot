@@ -149,7 +149,7 @@ set key {on|off} {default}
        (let ((it (find name *plot-plot-settings* :key 'first)))
 	 (when it
 	   (bind (((name &rest data) it)
-		  ((values name value) 
+		  ((:values name value) 
 		   (handle-setting (first data) name data value)))
 	     (when (and name value)
 	       (format out "set ~(~A~) ~A~C" name 
@@ -173,7 +173,7 @@ set key {on|off} {default}
        (let ((it (find name *plot-data-set-settings* :key 'first))) 
 	 (when it
 	   (bind (((name &rest data) it)
-		  ((values name value)
+		  ((:values name value)
 		   (handle-setting (first data) name data value)))
 	     (when (and name value)
 	       (unless first?
