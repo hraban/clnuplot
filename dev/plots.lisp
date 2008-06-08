@@ -257,24 +257,31 @@ set key {on|off} {default}
             (setf (item-at (settings object) name) it)))))
 
 (defmethod handle-setting ((kind (eql nil)) name data value)
+  (declare (ignore data))
   (values name value))
 
 (defmethod handle-setting ((kind (eql :translate)) name data value)
+  (declare (ignore name))
   (values (getf data :translate) value))
 
 (defmethod handle-setting ((kind (eql :range)) name data value)
+  (declare (ignore name data value))
   (values nil nil))
 
 (defmethod format-value-for-gnuplot (name (value string))
+  (declare (ignore name)) 
   (format nil "\"~A\"" (make-string-safe-for-unix value)))
 
 (defmethod format-value-for-gnuplot (name (value symbol))
+  (declare (ignore name)) 
   (format nil "~(~A~)" (symbol-name value)))
 
 (defmethod format-value-for-gnuplot (name (value integer))
+  (declare (ignore name)) 
   (format nil "~D" value))
 
 (defmethod format-value-for-gnuplot (name (value number))
+  (declare (ignore name)) 
   (format nil "~F" value))
 
 (defmethod format-value-for-gnuplot (name (value list))
@@ -408,6 +415,7 @@ set key {on|off} {default}
         (min-element nil)
         (max most-negative-double-float)
         (max-element nil))
+    (declare (ignorable min-element max-element))
     (iterate-elements
      data
      (lambda (element)
