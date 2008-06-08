@@ -210,7 +210,7 @@ set key {on|off} {default}
                           &rest args
                           &key (comment nil)
                           (filter (constantly t))
-                          &allow-other-keys)
+			  &allow-other-keys)
   (let ((data-set (make-instance 'plot-data-set
                     :comment comment
                     :style (plot-kind->plot-style plot-kind)))
@@ -222,6 +222,9 @@ set key {on|off} {default}
        (when (funcall filter datum)  
          (insert-item (data data-set) 
                       (apply #'make-data-point point-kind datum args)))))
+    #+(or) ;;not yet
+    (when (or y-transform x-transform)
+      )
     (values data-set)))
 
 (defmethod make-data-point ((point-kind (eql :box)) datum
@@ -307,8 +310,7 @@ set key {on|off} {default}
                         (legend-creator (lambda (x) (format nil "~A" x)))
                         &allow-other-keys)
   (remf args :key)
-  (bind ((first? t)
-         (result nil)
+  (bind ((result nil)
          (plot (apply #'make-plot nil nil 
                       :title title
                       :xlabel xlabel
@@ -323,13 +325,14 @@ set key {on|off} {default}
        (apply #'make-plot plot-kind
                   (collect-elements
                    data
-                   :filter (lambda (e) (funcall test data-kind (funcall key e))))
+                   :filter (lambda (e) 
+			     (funcall test data-kind (funcall key e))))
                   :x-coord x-coord
                   :y-coord y-coord
                   :plot plot
-                  :legend (when legend-creator (funcall legend-creator data-kind))
-                  args)
-       (setf first? nil)))
+                  :legend (when legend-creator
+			    (funcall legend-creator data-kind))
+                  args)))
     (values plot)))
 
 (defun scatter-plot (data &rest args &key
@@ -344,8 +347,7 @@ set key {on|off} {default}
                           (legend-creator (lambda (x) (format nil "~A" x)))
                           &allow-other-keys)
   (remf args :key)
-  (bind ((first? t)
-         (result nil)
+  (bind ((result nil)
          (plot (apply #'make-plot nil nil 
                       :title title
                       :xlabel xlabel
@@ -360,13 +362,14 @@ set key {on|off} {default}
        (apply #'make-plot :points
                   (collect-elements
                    data
-                   :filter (lambda (e) (funcall test data-kind (funcall key e))))
+                   :filter (lambda (e)
+			     (funcall test data-kind (funcall key e))))
                   :x-coord x-coord
                   :y-coord y-coord
                   :plot plot
-                  :legend (when legend-creator (funcall legend-creator data-kind))
-                  args)
-       (setf first? nil)))
+                  :legend (when legend-creator
+			    (funcall legend-creator data-kind))
+                  args)))
     (values plot)))
 
 (defun histogram (data &rest args &key
@@ -381,8 +384,7 @@ set key {on|off} {default}
                        (width 0.5)
                        &allow-other-keys)
   (remf args :key)
-  (bind ((first? t)
-         (result nil)
+  (bind ((result nil)
          (plot (apply #'make-plot nil nil 
                       :title title
                       :xlabel xlabel
@@ -406,8 +408,8 @@ set key {on|off} {default}
                   :width width
                   :offset (incf offset offset-delta)
                   :fill (list :solid 0.50)
-                  :legend (when legend-creator (funcall legend-creator data-kind)))
-       (setf first? nil)))
+                  :legend (when legend-creator
+			    (funcall legend-creator data-kind)))))
     (values plot)))
 
 (defun data->n-buckets (data bucket-count key &key bucket-center)
