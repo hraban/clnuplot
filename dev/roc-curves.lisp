@@ -1,9 +1,5 @@
 (in-package #:clnuplot)
 
-(export '(roc! roc make-roc-plot make-roc-plot-template))
-
-;;; ---------------------------------------------------------------------------
-
 (defun roc! (examples count-positive count-negative f test 
                                     &key (weight (constantly 1))
                                     (beta nil) (sort? t))

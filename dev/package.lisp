@@ -9,23 +9,28 @@ DISCUSSION
 |#
 (in-package #:cl-user)
 
+(defpackage #:clnuplot
+  (:use #:common-lisp #:metatilities #:bind 
+	#:cl-mathstats #:cl-containers)
+  (:export
+   #:make-plot
+   #:write-plot
+   #:fullpath
+          
+   #:scatter-plot
+   #:histogram
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (unless (find-package '#:clnuplot)
-    (defpackage #:clnuplot
-      (:use #:common-lisp #:metatilities #:bind 
-	    #:cl-mathstats #:cl-containers)
-      (:export
-       #:make-plot
-       #:write-plot
-       #:fullpath
+   #:roc!
+   #:roc 
+   #:make-roc-plot 
+   #:make-roc-plot-template
           
-       #:scatter-plot
-       #:histogram
-          
-       #:*plot-default-host*
-       #:*plot-default-directory*
-       #:*plot-ps2pdf-directory*
-       #:*gnuplot-home*)
-      #+ccl
-      (:export #:open-plot-in-window))))
+   #:*plot-default-host*
+   #:*plot-default-directory*
+   #:*plot-ps2pdf-directory*
+   #:*gnuplot-home*)
+  #+ccl
+  (:export #:open-plot-in-window))
+
+
+
