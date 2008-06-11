@@ -3,11 +3,14 @@
 <div class="contents">
 <div class="system-links">
 
-  * [Getting it][4]
-  * [Documentation][5]
-  * [News][6]
-  * [Changelog][7]
+  * [Getting it][#downloads]
+  * [Documentation][dpcs]
+  * [News][#news]
+  * [Changelog][cl]
 
+  [docs]: documentation/ "documentation link"
+  [cl]: changelog.html
+  
 </div>
 <div class="system-description">
 
@@ -32,32 +35,39 @@ CLNUPlot lets you manipulate plots in Lisp and then write out a command file tha
 
 Produces
  
-<img href="simple-example.png" width="320"></img>
+<img src="simple-example.png" width="320" />
 
 {anchor mailing-lists}
 
 ### Mailing Lists
 
-Nope. Sorry, there isn't one. You can, however, contact [Gary King][8].
+* [clnuplot-devel][devel-list]: A list for
+  announcements, questions, patches, bug reports, and so
+  on; It's for anything and everything
 
 {anchor downloads}
 
 ### Where is it
 
-CLNUPlot is on the [CLiki][9]. A [Darcs][10] repository is available. The command to get it is below:
-    
-    darcs get http://common-lisp.net/project/cl-containers/clnuplot/darcs/clnuplot
-    
+CLNUPlot is on the [CLiki][cliki-home]. A [darcs][]
+repository is available. The command to get it is below:
 
-CLNUPlot is also [ASDF installable][11] (and here is my [GPG Key][12]). 
-This is probably a better way to get it since it has several dependencies.
-There's also a handy [ gzipped tar file][13].
+    darcs get http://common-lisp.net/project/clnuplot
+
+CLNUPlot is also [ASDF installable][asdf-install] (and here
+is my [GPG Key][12]). This is probably a better way to get it
+since it has several dependencies. There's also a handy [
+gzipped tar file][tarball].
 
 {anchor news}
 
 ### What is happening
 
-19 October 2007 Mostly minor housecleaning; added trivial-shell dependency to make things easier.
+10 June 2008 - CLNUPlot finally reaches for its own home on
+common-lisp.net.
+
+19 October 2007 - Mostly minor housecleaning; added
+trivial-shell dependency to make things easier.
 
 3 January 2006 Just getting things set up here.
 
