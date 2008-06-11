@@ -156,7 +156,7 @@ numbers."
             ((and (consp data) (every-element-p data #'consp))
              ;; multiple plots
              (dolist (points data) 
-               (if (and (length-exactly-p (first points) 2)
+               (if (and (= (length (first points)) 2)
                         (numberp (caar points)))
                  ;; (((1 2) ...) ((3 4) ...))
                  (do-plot points)
