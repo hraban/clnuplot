@@ -26,7 +26,6 @@ DISCUSSION
 #+Test
 (make-string-safe-for-unix "hello there, I'm Bob.")
 
-;;; ---------------------------------------------------------------------------
 
 (defun plot-kind->plot-style (plot-kind)
   (ecase plot-kind
@@ -35,7 +34,6 @@ DISCUSSION
     (:points "points")
     ((:lines-points :lines-and-points) "linespoints")))
 
-;;; ---------------------------------------------------------------------------
 
 (defun plot-kind->point-kind (plot-kind)
   (ecase plot-kind

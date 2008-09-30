@@ -296,9 +296,7 @@ set key {on|off} {default}
       (format out "~A " (format-value-for-gnuplot name thing)))))
 
 
-;;; ---------------------------------------------------------------------------
 ;;; plot kinds
-;;; ---------------------------------------------------------------------------
 
 (defun quick-plot (data &rest args &key
                         (plot-kind :points)

@@ -45,7 +45,6 @@ f-measure function. The :weight keyword is provided to handles aggreates of exam
     (values (nreverse points)
             (nreverse f-measures))))
 
-;;; ---------------------------------------------------------------------------
 
 (defun roc (examples count-positive count-negative f test
                                    &key (weight (constantly 1)))
@@ -70,7 +69,6 @@ f-measure function. The :weight keyword is provided to handles aggreates of exam
                  :width 2))
 
 
-;;; ---------------------------------------------------------------------------
 
 #+Test
 (let ((data '((p 0.9)
@@ -101,7 +99,6 @@ f-measure function. The :weight keyword is provided to handles aggreates of exam
                  :linewidth 2))
 
 
-;;; ---------------------------------------------------------------------------
 
 #|
 ((1 2) ...)
@@ -130,7 +127,6 @@ f-measure function. The :weight keyword is provided to handles aggreates of exam
          :filename filename
          args))
 
-;;; ---------------------------------------------------------------------------
 
 (defun make-roc-plot (data &rest args
                            &key
