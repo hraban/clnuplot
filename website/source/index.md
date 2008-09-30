@@ -3,9 +3,9 @@
 <div class="contents">
 <div class="system-links">
 
-  * [Getting it][#downloads]
-  * [Documentation][dpcs]
-  * [News][#news]
+  * [Getting it](#downloads)
+  * [Documentation][docs]
+  * [News](#news)
   * [Changelog][cl]
 
   [docs]: documentation/ "documentation link"
