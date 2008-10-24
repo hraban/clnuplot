@@ -12,6 +12,8 @@ DISCUSSION
 (defpackage #:clnuplot
   (:use #:common-lisp #:metatilities #:bind 
 	#:cl-mathstats #:cl-containers)
+  (:import-from #:metatilities
+		#:pathname-name+type )   
   (:export
    #:make-plot
    #:write-plot
