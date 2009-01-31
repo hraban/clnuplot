@@ -96,6 +96,15 @@ set key {on|off} {default}
          (make-container 'sorted-list-container
                          :key 'first :stable? t) r)))
 
+;; quick hack - should specialize on 2-D bar charts and extend to other classes
+(defmethod labelsp (plot)
+  ;; taking two sec. to figure out CL-CONTAINERS would probably ease this pain...
+  (let ((sample-data-point
+	(first-element
+	 (contents (data (first-element (data-sets plot)))))))
+    (if (> (length sample-data-point) 3)
+	t)))
+
 (defmethod write-plot ((plot gnuplot) (style (eql :gnuplot)))
   (let ((pathname (fullpath plot))
         (first? t))
@@ -114,7 +123,9 @@ set key {on|off} {default}
            (if first?
              (format out "plot")
              (format out ","))
-           (format out " '-' with ~A " (style data-set))
+	   (if (labelsp plot)
+	       (format out " '-' using 1:2:3:xticlabels(4) with ~A " (style data-set))
+	       (format out " '-' with ~A " (style data-set)))
            (write-plot-settings data-set out)
            (setf first? nil)
            (incf index))))
@@ -189,7 +200,7 @@ set key {on|off} {default}
   (iterate-elements
    (data data-set)
    (lambda (datum)
-     (format out "~{~A ~}~C" datum #\Linefeed)))
+     (format out "~{~S ~}~C" datum #\Linefeed))) ; gnuplot wants strings/labels/... quoted
   (format out "e~C" #\Linefeed))
 
 (defmethod make-plot ((plot-kind symbol) data 
@@ -232,6 +243,7 @@ set key {on|off} {default}
 
 (defmethod make-data-point ((point-kind (eql :box)) datum
                             &key (x-coord 'first) (y-coord 'second) (width 0.5)
+			    (label 'third)
                             (offset nil)
                             &allow-other-keys)
   (append 
@@ -240,7 +252,9 @@ set key {on|off} {default}
               (if offset offset 0)))
      nil)
    (if y-coord (list (funcall y-coord datum)) nil)
-   (list (determine-width width))))
+   (list (determine-width width))
+   (if label (list (funcall label datum)) nil)
+   ))
 
 (defmethod determine-width ((width number))
   (values width))
